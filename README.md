@@ -85,6 +85,3 @@ npx expo start
 ## 🤝 Contribution & Bug Reports  
 
 As we are in **Alpha**, your feedback is critical. If you find a bug or have a feature request, please reach out to the development team.
-## 🤝 Contribution & Bug Reports
-
-As we are in **Alpha**, your feedback is critical. If you find a bug or have a feature request, please reach out to the development team.
