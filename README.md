@@ -1,10 +1,10 @@
 # Stevenson Space App
 
-Welcome to **Stevenson Space**, the next-generation student companion app designed for Stevenson High School. Built for speed, elegance, and utility, Stevenson Space aims to keep you organized and informed throughout the school day.
+Welcome to **Stevenson Space**, the next-generation student companion app designed for Stevenson High School. Built for speed, elegance, and utility, Stevenson Space aims to keep you organized and informed throughout the school day.  
 
-> WARNING
-> **Current Status: Alpha Stage**
-> The app is currently in active development (Alpha). You will likely encounter bugs and unfinished features.
+> WARNING  
+> **Current Status: Alpha Stage**  
+> The app is currently in active development (Alpha). You will likely encounter bugs and unfinished features.  
 > **Note**: Primary support is currently for **iOS only**. Android is not supported as of yet.
 
 ---
@@ -82,6 +82,9 @@ npx expo start
 
 ---
 
+## 🤝 Contribution & Bug Reports  
+
+As we are in **Alpha**, your feedback is critical. If you find a bug or have a feature request, please reach out to the development team.
 ## 🤝 Contribution & Bug Reports
 
 As we are in **Alpha**, your feedback is critical. If you find a bug or have a feature request, please reach out to the development team.
