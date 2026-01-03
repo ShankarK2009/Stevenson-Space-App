@@ -54,7 +54,6 @@
     "papaparse": "^5.5.3",
     "react": "19.1.0",
     "react-native": "0.81.5",
-    "react-native-calendars": "https://codeload.github.com/craftworkco/react-native-calendars/tar.gz/ae19e2af74ecdb29d6117ca41fbf41977a10cc23",
     "react-native-gesture-handler": "~2.28.0",
     "react-native-graph": "^1.1.0",
     "react-native-purchases": "^9.6.0",

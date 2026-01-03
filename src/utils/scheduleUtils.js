@@ -35,7 +35,7 @@ function dateMatchesSchedule(date, scheduleDates) {
   return false;
 }
 
-export function getScheduleForDate(date = new Date()) {
+export function getScheduleForDate(date = new Date(), preferredMode = null) {
   const specialSchedules = schedules.filter(
     (s) => s.isSpecial && dateMatchesSchedule(date, s.dates),
   );
@@ -49,12 +49,17 @@ export function getScheduleForDate(date = new Date()) {
     return null;
   }
 
-  const mode = matchingSchedule.modes[0];
+  // Find preferred mode if specified, otherwise default to first mode
+  const mode =
+    (preferredMode &&
+      matchingSchedule.modes.find((m) => m.name === preferredMode)) ||
+    matchingSchedule.modes[0];
 
   return {
     name: matchingSchedule.name,
     isSpecial: matchingSchedule.isSpecial,
     mode: mode.name,
+    allModes: matchingSchedule.modes.map(m => m.name), // Export available modes
     periods: mode.periods,
     startTimes: mode.start,
     endTimes: mode.end,
@@ -68,8 +73,8 @@ function parseTime(timeStr, date) {
   return result;
 }
 
-export function getCurrentPeriodInfo(date = new Date()) {
-  const schedule = getScheduleForDate(date);
+export function getCurrentPeriodInfo(date = new Date(), preferredMode = null) {
+  const schedule = getScheduleForDate(date, preferredMode);
 
   if (!schedule) {
     return {
@@ -138,6 +143,33 @@ export function getCurrentPeriodInfo(date = new Date()) {
     schedule,
     allPeriods: periodData,
   };
+}
+
+export function getNextSchoolDayInfo(currentDate) {
+  // Check tomorrow
+  const tomorrow = new Date(currentDate);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowInfo = getCurrentPeriodInfo(tomorrow);
+
+  if (tomorrowInfo.isSchoolDay) {
+    return { message: "See you tomorrow!", subtext: "School runs tomorrow" };
+  }
+
+  // Check if it's the weekend (Saturday or Sunday)
+  const day = currentDate.getDay();
+  if (day === 5 || day === 6) { // Friday or Saturday
+    return { message: "Have a great weekend!", subtext: "Enjoy your time off" };
+  }
+
+  // Default for breaks or other days off
+  return { message: "Enjoy your break!", subtext: "No school tomorrow" };
+}
+
+export function formatTimeRemaining(seconds) {
+  if (!seconds) return null;
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
 export function formatTime(seconds) {

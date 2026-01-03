@@ -9,6 +9,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BookOpen, ExternalLink } from "lucide-react-native";
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export default function ResourcesScreen() {
@@ -102,79 +103,24 @@ export default function ResourcesScreen() {
         </View>
 
         {/* Native iOS Segmented Control */}
-        <View
-          style={{
-            backgroundColor: theme.colors.inputBackground,
-            borderRadius: 9,
-            padding: 2,
-            flexDirection: "row",
-            marginBottom: 24,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => setSelectedTab("links")}
-            activeOpacity={0.6}
-            style={{
-              flex: 1,
-              paddingVertical: 7,
-              borderRadius: 7,
-              backgroundColor:
-                selectedTab === "links"
-                  ? theme.colors.cardBackground
-                  : "transparent",
-              shadowColor: selectedTab === "links" ? "#000" : "transparent",
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: selectedTab === "links" ? 0.15 : 0,
-              shadowRadius: 1,
-              elevation: selectedTab === "links" ? 2 : 0,
+        <View style={{ marginBottom: 24 }}>
+          <SegmentedControl
+            values={["Quick Links", "Documents"]}
+            selectedIndex={selectedTab === "links" ? 0 : 1}
+            onChange={(event) => {
+              setSelectedTab(event.nativeEvent.selectedSegmentIndex === 0 ? "links" : "documents");
             }}
-          >
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: "600",
-                color:
-                  selectedTab === "links"
-                    ? theme.colors.text
-                    : theme.colors.textSecondary,
-                textAlign: "center",
-              }}
-            >
-              Quick Links
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setSelectedTab("documents")}
-            activeOpacity={0.6}
-            style={{
-              flex: 1,
-              paddingVertical: 7,
-              borderRadius: 7,
-              backgroundColor:
-                selectedTab === "documents"
-                  ? theme.colors.cardBackground
-                  : "transparent",
-              shadowColor: selectedTab === "documents" ? "#000" : "transparent",
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: selectedTab === "documents" ? 0.15 : 0,
-              shadowRadius: 1,
-              elevation: selectedTab === "documents" ? 2 : 0,
+            fontStyle={{
+              color: theme.colors.text
             }}
-          >
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: "600",
-                color:
-                  selectedTab === "documents"
-                    ? theme.colors.text
-                    : theme.colors.textSecondary,
-                textAlign: "center",
-              }}
-            >
-              Documents
-            </Text>
-          </TouchableOpacity>
+            activeFontStyle={{
+              color: theme.colors.text
+            }}
+            style={{
+              backgroundColor: theme.colors.inputBackground,
+            }}
+            tintColor={theme.colors.cardBackground}
+          />
         </View>
 
         {/* Quick Links Section */}
