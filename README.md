@@ -78,7 +78,7 @@ npx expo start
 ### 4. Open the App:
 
    - For **iOS**: Press `i` to open in the simulator (requires Xcode) or scan the QR code with your camera/Expo Go.
-   - For **Web**: Press `w` to open in your browser.
+   - For **Android**: Press `a` to open in the simulator (requires Android Studio) or scan the QR code with your camera/Expo Go.
 
 ---
 
