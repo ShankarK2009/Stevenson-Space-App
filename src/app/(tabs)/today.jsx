@@ -12,6 +12,7 @@ import lunchMenu from "../../data/lunchMenu.json";
 import CurrentPeriodCard from "../../components/CurrentPeriodCard";
 import ScheduleList from "../../components/ScheduleList";
 import LunchCard from "../../components/LunchCard";
+import PWCCard from "../../components/PWCCard";
 
 export default function TodayScreen() {
   const insets = useSafeAreaInsets();
@@ -112,6 +113,9 @@ export default function TodayScreen() {
           periodInfo={periodInfo}
           handleModePress={handleModePress}
         />
+
+        {/* PWC Schedule */}
+        <PWCCard date={currentTime} />
 
         {/* Lunch Menu */}
         {todaysLunchData && (
