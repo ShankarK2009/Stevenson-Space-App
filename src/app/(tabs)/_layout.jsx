@@ -24,12 +24,12 @@ export default function TabLayout() {
 
             <NativeTabs.Trigger name="events">
                 <Label>Events</Label>
-                <Icon sf="calendar" drawable="ic_calendar" />
+                <Icon sf="calendar" drawable="ic_calendar_month" />
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="resources">
                 <Label>Resources</Label>
-                <Icon sf="book.fill" drawable="ic_book" />
+                <Icon sf="book.fill" drawable="ic_book2" />
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="settings">
