@@ -118,7 +118,7 @@ export default function TodayScreen() {
         <PWCCard date={currentTime} />
 
         {/* Lunch Menu */}
-        {todaysLunchData && (
+        {todaysLunchData && periodInfo?.isSchoolDay && (
           <LunchCard
             todaysLunch={`Comfort: ${todaysLunchData.comfortFood}\nMindful: ${todaysLunchData.mindful}\nSides: ${todaysLunchData.sides}\nSoup: ${todaysLunchData.soup}`}
           />
