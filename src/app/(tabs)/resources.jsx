@@ -12,6 +12,8 @@ import { BookOpen, ExternalLink } from "lucide-react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { useTheme } from "../../contexts/ThemeContext";
 
+import documentsData from "../../data/documents.json";
+
 export default function ResourcesScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
@@ -36,37 +38,6 @@ export default function ResourcesScreen() {
       name: "Patriot Dollars",
       url: "https://get.cbord.com/d125/full/login.php",
       icon: "💵",
-    },
-  ];
-
-  const documents = [
-    {
-      class: "Mathematics",
-      items: [
-        { name: "Calculus Textbook", url: "#" },
-        { name: "Algebra Reference Guide", url: "#" },
-      ],
-    },
-    {
-      class: "English",
-      items: [
-        { name: "Literature Anthology", url: "#" },
-        { name: "Grammar Handbook", url: "#" },
-      ],
-    },
-    {
-      class: "Science",
-      items: [
-        { name: "Biology Textbook", url: "#" },
-        { name: "Chemistry Lab Manual", url: "#" },
-      ],
-    },
-    {
-      class: "History",
-      items: [
-        { name: "US History Textbook", url: "#" },
-        { name: "World History Reader", url: "#" },
-      ],
     },
   ];
 
@@ -184,7 +155,7 @@ export default function ResourcesScreen() {
         {/* Documents Section */}
         {selectedTab === "documents" && (
           <View>
-            {documents.map((section, sectionIndex) => (
+            {Object.entries(documentsData).map(([className, items], sectionIndex) => (
               <View key={sectionIndex} style={{ marginBottom: 20 }}>
                 <Text
                   style={{
@@ -194,13 +165,13 @@ export default function ResourcesScreen() {
                     marginBottom: 12,
                   }}
                 >
-                  {section.class}
+                  {className}
                 </Text>
 
-                {section.items.map((doc, docIndex) => (
+                {items.map((doc, docIndex) => (
                   <TouchableOpacity
                     key={docIndex}
-                    onPress={() => handleLinkPress(doc.url)}
+                    onPress={() => handleLinkPress(doc.link)}
                     activeOpacity={0.6}
                     style={{
                       backgroundColor: theme.colors.cardBackground,
@@ -230,7 +201,7 @@ export default function ResourcesScreen() {
                           marginLeft: 10,
                         }}
                       >
-                        {doc.name}
+                        {doc.title}
                       </Text>
                     </View>
                     <ExternalLink size={16} color={theme.colors.textTertiary} />
