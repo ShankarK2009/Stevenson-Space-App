@@ -1,4 +1,4 @@
-import { schedules } from "../data/schedules";
+import schedules from "../data/schedules.json";
 
 function parseDate(dateStr) {
   const [month, day, year] = dateStr.split("/").map(Number);

@@ -4,21 +4,38 @@ import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { useTheme } from "../../contexts/ThemeContext";
-import { events } from "../../data/events";
+import staticEvents from "../../data/events.json";
+import { getEvents, fetchAndCacheEvents } from "../../utils/eventsManager";
 import EventCalendar from "../../components/EventCalendar";
 import EventList from "../../components/EventList";
+import { useEffect } from "react";
 
 export default function EventsScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const [eventsData, setEventsData] = useState(staticEvents);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [viewMode, setViewMode] = useState("calendar");
   const [calendarSelectedDate, setCalendarSelectedDate] = useState(null);
 
+  useEffect(() => {
+    // 1. Load from cache (fast)
+    getEvents().then(({ data }) => {
+      setEventsData(data);
+
+      // 2. Fetch fresh data (background)
+      fetchAndCacheEvents().then(freshData => {
+        if (freshData) {
+          setEventsData(freshData);
+        }
+      }).catch(err => console.log("Background fetch failed", err));
+    });
+  }, []);
+
   // Get events for selected month
   const getEventsForMonth = () => {
     const monthEvents = [];
-    Object.keys(events).forEach((dateKey) => {
+    Object.keys(eventsData).forEach((dateKey) => {
       // Parse "M/D/YYYY" manually
       const [monthStr, dayStr, yearStr] = dateKey.split("/");
       const month = parseInt(monthStr, 10);
@@ -33,7 +50,7 @@ export default function EventsScreen() {
         monthEvents.push({
           date: eventDate,
           dateKey,
-          events: events[dateKey],
+          events: eventsData[dateKey],
         });
       }
     });
@@ -93,7 +110,7 @@ export default function EventsScreen() {
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth() + 1;
     const dateKey = `${month}/${day}/${year}`;
-    return events[dateKey] && events[dateKey].length > 0;
+    return eventsData[dateKey] && eventsData[dateKey].length > 0;
   };
 
   const getEventsForDate = (day) => {
@@ -101,7 +118,7 @@ export default function EventsScreen() {
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth() + 1;
     const dateKey = `${month}/${day}/${year}`;
-    return events[dateKey] || [];
+    return eventsData[dateKey] || [];
   };
 
   const handleDatePress = (day) => {

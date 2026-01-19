@@ -71,9 +71,21 @@ export default function ResourcesScreen() {
   ];
 
   const handleLinkPress = async (url) => {
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      await Linking.openURL(url);
+    if (!url || url === "#") {
+      alert("This resource is coming soon!");
+      return;
+    }
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        alert(`Cannot open this URL: ${url}`);
+      }
+    } catch (error) {
+      console.error("Failed to open URL:", error);
+      alert("An error occurred while trying to open the link.");
     }
   };
 

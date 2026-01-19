@@ -5,11 +5,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../../contexts/ThemeContext";
 import {
   getCurrentPeriodInfo,
-  getLunchDayNumber,
   getNextSchoolDayInfo,
   formatTimeRemaining,
 } from "../../utils/scheduleUtils";
-import { lunchMenu } from "../../data/lunchMenu";
+import lunchMenu from "../../data/lunchMenu.json";
 import CurrentPeriodCard from "../../components/CurrentPeriodCard";
 import ScheduleList from "../../components/ScheduleList";
 import LunchCard from "../../components/LunchCard";
@@ -72,11 +71,8 @@ export default function TodayScreen() {
     }
   };
 
-  const lunchDay = getLunchDayNumber(currentTime);
-  const todaysLunchData = lunchMenu.find((menu) => menu.dayNumber === lunchDay);
-  const todaysLunch = todaysLunchData
-    ? `${todaysLunchData.comfortFood} • ${todaysLunchData.mindful}\nSides: ${todaysLunchData.sides}\nSoup: ${todaysLunchData.soup}`
-    : "No lunch menu available";
+  const dateString = `${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()}`;
+  const todaysLunchData = lunchMenu.find((menu) => menu.date === dateString);
 
   return (
     <View style={styles.container}>
@@ -118,10 +114,11 @@ export default function TodayScreen() {
         />
 
         {/* Lunch Menu */}
-        <LunchCard
-          lunchDay={lunchDay}
-          todaysLunch={todaysLunch}
-        />
+        {todaysLunchData && (
+          <LunchCard
+            todaysLunch={`Comfort: ${todaysLunchData.comfortFood}\nMindful: ${todaysLunchData.mindful}\nSides: ${todaysLunchData.sides}\nSoup: ${todaysLunchData.soup}`}
+          />
+        )}
       </ScrollView >
     </View >
   );
