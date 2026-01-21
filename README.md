@@ -1,54 +1,80 @@
 # Stevenson Space App
 
-Welcome to **Stevenson Space**, the next-generation student companion app designed for Stevenson High School. Built for speed, elegance, and utility, Stevenson Space aims to keep you organized and informed throughout the school day.  
+Welcome to **Stevenson Space**, a student companion app designed for Stevenson High School. Built for speed, elegance, and utility, Stevenson Space aims to keep you organized and informed throughout the school day.
 
-> WARNING  
-> **Current Status: Alpha Stage**  
-> The app is currently in active development (Alpha). You will likely encounter bugs and unfinished features.  
-> **Note**: Primary support is currently for **iOS only**. Android is not supported as of yet.
+> [!WARNING]
+> **Current Status: Alpha Stage**
+> The app is currently in active development (Alpha). You will likely encounter bugs and unfinished features.
+
+---
+
+## 📱 Features
+
+- **Today**: View current period countdown, your daily schedule, the lunch menu, and the PWC schedule at a glance.
+- **Events**: Stay updated with school events synced directly from the district calendar.
+- **Resources**: Quick access to essential school links and PWC schedules.
+- **Settings**: Customize your app experience, such as notification settings.
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Framework**: [Expo 54](https://expo.dev/) (SDK 54)
+- **Framework**: [Expo 54](https://expo.dev/)
 - **Runtime**: [React Native 0.81](https://reactnative.dev/)
-- **Navigation**: [Expo Router](https://docs.expo.dev/router/introduction/)
-- **Icons**: [Lucide React Native](https://lucide.dev/)
+- **Navigation**: [Expo Router](https://docs.expo.dev/router/introduction/) (Native Tabs via `expo-router/unstable-native-tabs`)
+- **Icons**: [Lucide React Native](https://lucide.dev/) & SF Symbols
 - **Styling**: Native CSS styling with a focus on premium aesthetics.
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
-- **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
+- **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest) & `ical.js`
 
 ---
 
 ## 🗺 Roadmap
 
-Our goal is to create a seamless experience across all platforms. Below is the plan for the upcoming releases:
+### Version 1.0 (Production Launch)
 
-### 🌟 Version 1.0 (Production Launch)
-*The first stable release for all students.*
+- [ ] Add analytics tracking via PostHog
+- [ ] Add an option to sync with Apple / Google Calendar
+  - Just an ICS link, with the option to choose what type of events to include
+- [ ] Make settings functional
+  - Notifications when the period ends
+  - Notifications when class starts
+- [ ] Update design of “Today” tab to look more like [stevenson.space](https://stevenson.space/) mobile version
+- [ ] Change icons on quick links
 
-- **📱 Platform Support**: Official **Android** support.
-- **🎨 UI Refinement**: 
-  - Transition to **Expo UI** for a native look and feel on iOS 18+ and Android.
-  - Native Navigation bars and Segmented Controls.
-- **📅 Calendar Enhancements**:
-  - Implement "Form Sheets" on iOS 18+ for event details.
-  - Clean event view: Show title by default, reveal full description on click.
-- **🥗 Content Updates**:
-  - Real-time Lunch Menu updates.
-  - Synced Calendar Events.
-- **👤 Profile & Settings**:
-  - Transform "Settings" into a personal "Profile" page.
-  - Fully functional Push Notifications configuration.
+### Version 1.1
 
-### 🚀 Version 1.1 (Next Steps)
-*Advanced features to boost productivity.*
+- [ ] Add the ability to customize notifications. Options:
+  - Notifications when the period ends
+  - Notifications when class starts
+  - Notifications “**x”** mins before period ends
+- [ ] Add feedback board support
 
-- **📅 Personalization**: Ability to add and manage your personal class schedule.
-- **🧩 Widgets**: Home screen widgets for both iOS and Android.
-- **⚡️ Live Activities**: Stay updated with real-time events on your lock screen.
-- **🏝 Dynamic Island**: Deep integration with the Dynamic Island for active session tracking.
+### Version 2.0
+
+- [ ] Add the ability to add a personal schedule (rename classes)
+- [ ] Add more in-built themes
+- [ ] Add “Coming this week” events on the Today tab
+
+### Version 2.1
+
+- [ ] Add ability for custom themes
+- [ ] Give people an option to customize what they want on the “Today” tab
+  - Ex: Lunch menu, PWC Schedule, Today’s events, or events for the week
+
+### Version 3.0
+
+- [ ] Add widgets on iOS and Android
+- [ ] Add live activities
+- [ ] Add Dynamic Island support
+
+### Version 3.5
+
+- [ ] Add simple onboarding flow
+  - Explanation of app
+  - Option to customize schedule (add class names)
+  - Customize notification behavior
+  - Prompt on Widgets, Live activities, and Dynamic Island
 
 ---
 
@@ -77,11 +103,11 @@ npx expo start
 
 ### 4. Open the App:
 
-   - For **iOS**: Press `i` to open in the simulator (requires Xcode) or scan the QR code with your camera/Expo Go.
-   - For **Android**: Press `a` to open in the simulator (requires Android Studio) or scan the QR code with your camera/Expo Go.
+- **iOS**: Press `i` to open in the simulator (requires Xcode) or scan the QR code with your camera/Expo Go.
+- **Android**: Press `a` to open in the simulator (requires Android Studio) or scan the QR code with your camera/Expo Go.
 
 ---
 
-## 🤝 Contribution & Bug Reports  
+## 🤝 Contribution & Bug Reports
 
 As we are in **Alpha**, your feedback is critical. If you find a bug or have a feature request, please reach out to the development team.
