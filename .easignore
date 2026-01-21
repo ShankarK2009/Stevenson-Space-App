@@ -34,3 +34,17 @@ app-example
 
 caches/
 public/
+
+# local env files
+.env
+.env*.local
+
+# Native builds
+ios/
+android/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo

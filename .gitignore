@@ -44,4 +44,9 @@ caches/*
 # Native builds
 ios/
 android/
-.expo/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
