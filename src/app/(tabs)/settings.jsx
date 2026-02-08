@@ -226,7 +226,7 @@ export default function SettingsScreen() {
               marginBottom: 4,
             }}
           >
-            Stevenson Agenda
+            Stevenson Space
           </Text>
           <Text
             style={{
@@ -277,7 +277,7 @@ export default function SettingsScreen() {
 
             <ScrollView style={{ maxHeight: 400 }} showsVerticalScrollIndicator={false}>
               <Text style={{ fontSize: 16, lineHeight: 24, color: theme.colors.text, marginBottom: 16 }}>
-                <Text style={{ fontWeight: '700', color: theme.colors.stevensonGold }}>Stevenson Space App</Text> is an open-source initiative designed to improve the student experience at Stevenson High School.
+                <Text style={{ fontWeight: '700', color: theme.colors.stevensonGold }}>Stevenson Space</Text> is an open-source initiative designed to improve the student experience at Stevenson High School.
               </Text>
 
               <Text style={{ fontSize: 16, lineHeight: 24, color: theme.colors.text, marginBottom: 24 }}>
@@ -341,7 +341,7 @@ export default function SettingsScreen() {
             </View>
           </View>
         </View>
-      </Modal>
-    </View>
+      </Modal >
+    </View >
   );
 }
