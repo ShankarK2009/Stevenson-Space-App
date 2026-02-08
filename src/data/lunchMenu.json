@@ -33,7 +33,7 @@
   },
   {
     "date": "2/6/2026",
-    "comfortFood": "Baked Turkey Meatloaf w/ Chipotle BBQ***",
+    "comfortFood": "Baked Turkey Meatloaf w/ Chipotle BBQ",
     "mindful": "Cajun Shrimp Pasta",
     "sides": "Roasted Vegetables, Whipped Sweet Potatoes",
     "internationalStation": "Burrito",
@@ -66,7 +66,7 @@
   {
     "date": "2/12/2026",
     "comfortFood": "Vegetable Pot Pie Over Biscuit",
-    "mindful": "Adobo Roasted Turkey Breast***",
+    "mindful": "Adobo Roasted Turkey Breast",
     "sides": "Corn, Cauliflower",
     "internationalStation": "Mac & Cheese",
     "soup": "Minestrone, Chicken Gumbo"
@@ -98,7 +98,7 @@
   {
     "date": "2/18/2026",
     "comfortFood": "Homemade Beef Meatloaf",
-    "mindful": "Roast Turkey Breast ***",
+    "mindful": "Roast Turkey Breast",
     "sides": "Roasted Carrots and Broccoli, Mashed Potatoes",
     "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
@@ -114,7 +114,7 @@
   {
     "date": "2/20/2026",
     "comfortFood": "BBQ Pulled Chicken Sandwich",
-    "mindful": "Southwest Beef Mac w/ Cheese ***",
+    "mindful": "Southwest Beef Mac w/ Cheese",
     "sides": "Roasted Vegetables, Potato Wedges",
     "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
@@ -130,7 +130,7 @@
   {
     "date": "2/24/2026",
     "comfortFood": "Veggie Chilaquiles",
-    "mindful": "Chicken Cordon Bleu ***",
+    "mindful": "Chicken Cordon Bleu",
     "sides": "Roasted Carrots, Cilantro Lime Rice",
     "internationalStation": "Pasta",
     "soup": "Tomato Basil Bisque, Broccoli Cheddar"
@@ -145,7 +145,7 @@
   },
   {
     "date": "2/26/2026",
-    "comfortFood": "Turkey Sloppy Joe ***",
+    "comfortFood": "Turkey Sloppy Joe",
     "mindful": "Dijon Chicken",
     "sides": "Broccoli & carrots, Mashed Potatoes",
     "internationalStation": "Pasta",
