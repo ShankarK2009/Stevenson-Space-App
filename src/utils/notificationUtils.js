@@ -12,10 +12,11 @@ const DEFAULT_SETTINGS = {
     periodEnd: false,
 };
 
-// Configure notification handler
+// Configure notification handler (SDK 54+ format)
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
-        shouldShowAlert: true,
+        shouldShowBanner: true,
+        shouldShowList: true,
         shouldPlaySound: true,
         shouldSetBadge: false,
     }),
@@ -115,7 +116,7 @@ export async function scheduleClassNotifications(settings = null) {
                             },
                             trigger: {
                                 type: Notifications.SchedulableTriggerInputTypes.DATE,
-                                date: period.startTime,
+                                date: period.startTime.getTime(),
                             },
                         });
                         scheduledCount++;
@@ -135,7 +136,7 @@ export async function scheduleClassNotifications(settings = null) {
                             },
                             trigger: {
                                 type: Notifications.SchedulableTriggerInputTypes.DATE,
-                                date: fiveMinutesBeforeEnd,
+                                date: fiveMinutesBeforeEnd.getTime(),
                             },
                         });
                         scheduledCount++;

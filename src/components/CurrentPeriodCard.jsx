@@ -4,7 +4,7 @@ import { Clock, Calendar as CalendarIcon } from "lucide-react-native";
 import { useTheme } from "../contexts/ThemeContext";
 import { formatTimeRemaining } from "../utils/scheduleUtils";
 
-export default function CurrentPeriodCard({ periodInfo, nextSchoolDay }) {
+function CurrentPeriodCard({ periodInfo, nextSchoolDay }) {
     const theme = useTheme();
     const styles = createStyles(theme);
 
@@ -75,6 +75,8 @@ export default function CurrentPeriodCard({ periodInfo, nextSchoolDay }) {
         </View>
     );
 }
+
+export default React.memo(CurrentPeriodCard);
 
 const createStyles = (theme) => StyleSheet.create({
     card: {

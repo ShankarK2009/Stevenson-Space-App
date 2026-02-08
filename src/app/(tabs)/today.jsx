@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { View, Text, ScrollView, Alert, Platform, ActionSheetIOS, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -38,7 +38,7 @@ export default function TodayScreen() {
   }, [scheduleMode]);
 
   // Handle schedule mode change
-  const handleModePress = () => {
+  const handleModePress = useCallback(() => {
     if (!periodInfo?.schedule?.allModes || periodInfo.schedule.allModes.length <= 1) {
       Alert.alert("No alternate schedules", "This day only has one schedule mode.");
       return;
@@ -70,10 +70,17 @@ export default function TodayScreen() {
         })).concat({ text: "Cancel", style: "cancel" })
       );
     }
-  };
+  }, [periodInfo?.schedule?.allModes]);
 
-  const dateString = `${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()}`;
-  const todaysLunchData = lunchMenu.find((menu) => menu.date === dateString);
+  // Memoize date string and lunch lookup to avoid recalculating every second
+  const dateString = useMemo(() =>
+    `${currentTime.getMonth() + 1}/${currentTime.getDate()}/${currentTime.getFullYear()}`,
+    [currentTime.getMonth(), currentTime.getDate(), currentTime.getFullYear()]
+  );
+  const todaysLunchData = useMemo(() =>
+    lunchMenu.find((menu) => menu.date === dateString),
+    [dateString]
+  );
 
   return (
     <View style={styles.container}>

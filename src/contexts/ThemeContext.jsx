@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import { useColorScheme } from "react-native";
 
 const ThemeContext = createContext();
@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children }) => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
-  const theme = {
+  const theme = useMemo(() => ({
     isDark,
     colors: {
       // Stevenson brand colors
@@ -67,7 +67,7 @@ export const ThemeProvider = ({ children }) => {
       warning: "#F59E0B",
       error: "#EF4444",
     },
-  };
+  }), [isDark]);
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>

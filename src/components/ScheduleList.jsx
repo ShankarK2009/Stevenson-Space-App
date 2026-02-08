@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { ChevronDown } from "lucide-react-native";
 import { useTheme } from "../contexts/ThemeContext";
 
-export default function ScheduleList({ periodInfo, handleModePress }) {
+function ScheduleList({ periodInfo, handleModePress }) {
     const theme = useTheme();
     const styles = createStyles(theme);
 
@@ -69,6 +69,8 @@ export default function ScheduleList({ periodInfo, handleModePress }) {
         </View>
     );
 }
+
+export default React.memo(ScheduleList);
 
 const createStyles = (theme) => StyleSheet.create({
     card: {

@@ -4,7 +4,7 @@ import { Dumbbell } from "lucide-react-native";
 import { useTheme } from "../contexts/ThemeContext";
 import { getPWCStatus } from "../utils/pwcUtils";
 
-export default function PWCCard({ date = new Date() }) {
+function PWCCard({ date = new Date() }) {
     const theme = useTheme();
     const styles = createStyles(theme);
     const { isOpen, hours, isSpecial } = getPWCStatus(date);
@@ -37,6 +37,8 @@ export default function PWCCard({ date = new Date() }) {
         </View>
     );
 }
+
+export default React.memo(PWCCard);
 
 const createStyles = (theme) => StyleSheet.create({
     card: {

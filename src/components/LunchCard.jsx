@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Utensils } from "lucide-react-native";
 import { useTheme } from "../contexts/ThemeContext";
 
-export default function LunchCard({ todaysLunch }) {
+function LunchCard({ todaysLunch }) {
     const theme = useTheme();
     const styles = createStyles(theme);
 
@@ -17,6 +17,8 @@ export default function LunchCard({ todaysLunch }) {
         </View>
     );
 }
+
+export default React.memo(LunchCard);
 
 const createStyles = (theme) => StyleSheet.create({
     card: {
