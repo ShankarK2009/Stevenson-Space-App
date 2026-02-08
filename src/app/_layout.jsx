@@ -32,6 +32,20 @@ export default function RootLayout() {
     }
   }, [isReady]);
 
+  // Notification Setup
+  useEffect(() => {
+    async function setupNotifications() {
+      // 1. Request permissions
+      const { registerForPushNotificationsAsync, scheduleClassNotifications } = await import("../utils/notificationUtils");
+      await registerForPushNotificationsAsync();
+
+      // 2. Schedule notifications (refreshes schedule for today/tomorrow)
+      await scheduleClassNotifications();
+    }
+
+    setupNotifications();
+  }, []);
+
   if (!isReady) {
     return null;
   }

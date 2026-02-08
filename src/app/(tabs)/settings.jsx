@@ -8,7 +8,26 @@ import { useTheme } from "../../contexts/ThemeContext";
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
-  const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
+  const [notificationSettings, setNotificationSettings] = React.useState({
+    classStart: false,
+    periodEnd: false,
+  });
+
+  React.useEffect(() => {
+    // Load initial settings
+    import("../../utils/notificationUtils").then(({ getNotificationSettings }) => {
+      getNotificationSettings().then(setNotificationSettings);
+    });
+  }, []);
+
+  const toggleSetting = async (key) => {
+    const newSettings = { ...notificationSettings, [key]: !notificationSettings[key] };
+    setNotificationSettings(newSettings);
+
+    // Save and reschedule
+    const { saveNotificationSettings } = await import("../../utils/notificationUtils");
+    await saveNotificationSettings(newSettings);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
@@ -44,6 +63,55 @@ export default function SettingsScreen() {
             marginBottom: 16,
           }}
         >
+          {/* Class Start Notification */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: 20,
+              borderBottomWidth: 1,
+              borderBottomColor: theme.colors.cardBorder,
+            }}
+          >
+            <View
+              style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
+            >
+              <Bell size={22} color={theme.colors.stevensonGold} />
+              <View style={{ marginLeft: 12, flex: 1 }}>
+                <Text
+                  style={{
+                    fontSize: 17,
+                    fontWeight: "400",
+                    color: theme.colors.text,
+                    marginBottom: 2,
+                  }}
+                >
+                  Class Start
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    fontWeight: "400",
+                    color: theme.colors.textSecondary,
+                  }}
+                >
+                  Get notified when class begins
+                </Text>
+              </View>
+            </View>
+            <Switch
+              value={notificationSettings.classStart}
+              onValueChange={() => toggleSetting("classStart")}
+              ios_backgroundColor={theme.colors.inputBackground}
+              trackColor={{
+                false: theme.colors.inputBackground,
+                true: theme.colors.stevensonGold,
+              }}
+            />
+          </View>
+
+          {/* Period End Notification */}
           <View
             style={{
               flexDirection: "row",
@@ -65,7 +133,7 @@ export default function SettingsScreen() {
                     marginBottom: 2,
                   }}
                 >
-                  Period Notifications
+                  Period End
                 </Text>
                 <Text
                   style={{
@@ -74,13 +142,13 @@ export default function SettingsScreen() {
                     color: theme.colors.textSecondary,
                   }}
                 >
-                  Get notified before periods end
+                  Get notified 5 mins before end
                 </Text>
               </View>
             </View>
             <Switch
-              value={notificationsEnabled}
-              onValueChange={setNotificationsEnabled}
+              value={notificationSettings.periodEnd}
+              onValueChange={() => toggleSetting("periodEnd")}
               ios_backgroundColor={theme.colors.inputBackground}
               trackColor={{
                 false: theme.colors.inputBackground,
