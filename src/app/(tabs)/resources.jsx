@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
+  Image,
   StyleSheet,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
@@ -22,24 +23,34 @@ export default function ResourcesScreen() {
   const [selectedTab, setSelectedTab] = useState("links");
 
   const quickLinks = [
-    { name: "Canvas", url: "https://d125.instructure.com/", icon: "📚" },
+    {
+      name: "Canvas",
+      url: "https://d125.instructure.com/",
+      image: require("../../../assets/logos/canvas.png")
+    },
     { name: "IRC", url: "https://irc.d125.org/login", icon: "📊" },
     {
       name: "Infinite Campus",
       url: "https://infinitecampus.d125.org/campus/portal/aes.jsp",
-      icon: "📋",
+      image: require("../../../assets/logos/campus.png"),
     },
-    { name: "Naviance", url: "https://student.naviance.com/aeshs", icon: "🎓" },
+    {
+      name: "Naviance",
+      url: "https://student.naviance.com/aeshs",
+      image: require("../../../assets/logos/naviance.png")
+    },
     { name: "SHS Maps", url: "https://shsmaps.com/", icon: "🗺️" },
     {
       name: "Peer Tutors",
       url: "https://sites.google.com/d125.org/peer-tutors/content-database",
-      icon: "👥",
+      image: theme.isDark
+        ? require("../../../assets/logos/peer_tutors_dark.png")
+        : require("../../../assets/logos/peer_tutors_light.png"),
     },
     {
       name: "Patriot Dollars",
       url: "https://get.cbord.com/d125/full/login.php",
-      icon: "💵",
+      image: require("../../../assets/logos/patriot_dollars.jpg"),
     },
   ];
 
@@ -107,7 +118,11 @@ export default function ResourcesScreen() {
                 style={styles.linkCard}
               >
                 <View style={styles.linkContent}>
-                  <Text style={styles.linkIcon}>{link.icon}</Text>
+                  {link.image ? (
+                    <Image source={link.image} style={styles.linkImage} resizeMode="contain" />
+                  ) : (
+                    <Text style={styles.linkIcon}>{link.icon}</Text>
+                  )}
                   <Text style={styles.linkName}>{link.name}</Text>
                 </View>
                 <ExternalLink size={20} color={theme.colors.textSecondary} />
@@ -190,6 +205,12 @@ const createStyles = (theme) => StyleSheet.create({
   linkIcon: {
     fontSize: 28,
     marginRight: 12,
+  },
+  linkImage: {
+    width: 32,
+    height: 32,
+    marginRight: 12,
+    borderRadius: 8,
   },
   linkName: {
     fontSize: 17,
