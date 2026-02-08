@@ -3,112 +3,96 @@
         "id": "master-calendar",
         "name": "Master Calendar",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_358.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_358.ics",
         "recommended": true
     },
     {
         "id": "activity-period",
         "name": "Activity Period",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_365.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_365.ics",
         "recommended": true
     },
     {
         "id": "late-arrival-early-dismissal",
         "name": "Late Arrival-Early Dismissal Days",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_351.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_351.ics",
         "recommended": true
     },
     {
         "id": "non-attendance",
         "name": "Non-Attendance Days",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_350.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_350.ics",
         "recommended": true
     },
     {
         "id": "athletics",
         "name": "Athletics",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_359.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_359.ics",
         "recommended": true
     },
     {
         "id": "testing-day",
         "name": "Testing Day",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_356.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_356.ics",
         "recommended": true
     },
     {
         "id": "student-activities-clubs",
         "name": "Student Activities and Clubs",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_353.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_353.ics",
         "recommended": true
     },
     {
         "id": "fine-arts",
         "name": "Fine Arts",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_349.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_349.ics",
         "recommended": true
     },
     {
         "id": "all-public",
         "name": "All Public Calendars",
         "webcalUrl": "webcal://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=F185957257CD421AB6A7F080793679D4",
-        "googleUrl": "https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=F185957257CD421AB6A7F080793679D4",
         "recommended": false
     },
     {
         "id": "college-career",
         "name": "College & Career Center",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_364.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_364.ics",
         "recommended": false
     },
     {
         "id": "foundation-events",
         "name": "Foundation Events",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_354.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_354.ics",
         "recommended": false
     },
     {
         "id": "fundraisers",
         "name": "Fundraisers",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_362.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_362.ics",
         "recommended": false
     },
     {
         "id": "orientations",
         "name": "Orientations",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_366.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_366.ics",
         "recommended": false
     },
     {
         "id": "parent-calendar",
         "name": "Parent Calendar",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_352.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_352.ics",
         "recommended": false
     },
     {
         "id": "student-check-in",
         "name": "Student Check-In Days",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_363.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_363.ics",
         "recommended": false
     },
     {
         "id": "summer-school",
         "name": "Summer School",
         "webcalUrl": "webcal://www.d125.org/calendar/calendar_357.ics",
-        "googleUrl": "https://www.d125.org/calendar/calendar_357.ics",
         "recommended": false
     }
 ]

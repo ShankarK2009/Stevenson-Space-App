@@ -24,8 +24,6 @@ export default function CalendarSubscriptions({ visible, onClose }) {
     });
 
     const handleSubscribe = (feed) => {
-        const googleCalendarUrl = `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(feed.googleUrl)}`;
-
         const buttons = [];
 
         if (Platform.OS === "ios") {
@@ -39,24 +37,13 @@ export default function CalendarSubscriptions({ visible, onClose }) {
                     }
                 },
             });
-        } else {
-            buttons.push({
-                text: "Add to Google Calendar",
-                onPress: async () => {
-                    try {
-                        await Linking.openURL(googleCalendarUrl);
-                    } catch (error) {
-                        Alert.alert("Error", "Could not open Google Calendar");
-                    }
-                },
-            });
         }
 
         buttons.push({ text: "Cancel", style: "cancel" });
 
         Alert.alert(
             feed.name,
-            Platform.OS === "ios" ? "Add this calendar to your device?" : "Add to Google Calendar?",
+            Platform.OS === "ios" ? "Add this calendar to your device?" : "Calendar subscription is not supported on Android.",
             buttons
         );
     };

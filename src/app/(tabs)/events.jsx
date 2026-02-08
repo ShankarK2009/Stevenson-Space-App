@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
@@ -154,13 +154,15 @@ export default function EventsScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Events</Text>
-          <TouchableOpacity
-            onPress={() => setShowSubscriptions(true)}
-            style={styles.subscribeButton}
-            activeOpacity={0.6}
-          >
-            <CalendarPlus size={22} color={theme.colors.text} />
-          </TouchableOpacity>
+          {Platform.OS === "ios" && (
+            <TouchableOpacity
+              onPress={() => setShowSubscriptions(true)}
+              style={styles.subscribeButton}
+              activeOpacity={0.6}
+            >
+              <CalendarPlus size={22} color={theme.colors.text} />
+            </TouchableOpacity>
+          )}
         </View>
 
         {/* Native iOS Segmented Control */}
