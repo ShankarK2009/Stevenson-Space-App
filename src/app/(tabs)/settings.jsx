@@ -2,14 +2,13 @@ import React from "react";
 import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Bell, Calendar, Info } from "lucide-react-native";
+import { Bell, Info } from "lucide-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
-  const [calendarSyncEnabled, setCalendarSyncEnabled] = React.useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
@@ -51,8 +50,6 @@ export default function SettingsScreen() {
               justifyContent: "space-between",
               alignItems: "center",
               padding: 20,
-              borderBottomWidth: 1,
-              borderBottomColor: theme.colors.borderLight,
             }}
           >
             <View
@@ -84,51 +81,6 @@ export default function SettingsScreen() {
             <Switch
               value={notificationsEnabled}
               onValueChange={setNotificationsEnabled}
-              ios_backgroundColor={theme.colors.inputBackground}
-              trackColor={{
-                false: theme.colors.inputBackground,
-                true: theme.colors.stevensonGold,
-              }}
-            />
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: 20,
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
-            >
-              <Calendar size={22} color={theme.colors.stevensonGold} />
-              <View style={{ marginLeft: 12, flex: 1 }}>
-                <Text
-                  style={{
-                    fontSize: 17,
-                    fontWeight: "400",
-                    color: theme.colors.text,
-                    marginBottom: 2,
-                  }}
-                >
-                  Calendar Sync
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    fontWeight: "400",
-                    color: theme.colors.textSecondary,
-                  }}
-                >
-                  Sync with Google/Apple Calendar
-                </Text>
-              </View>
-            </View>
-            <Switch
-              value={calendarSyncEnabled}
-              onValueChange={setCalendarSyncEnabled}
               ios_backgroundColor={theme.colors.inputBackground}
               trackColor={{
                 false: theme.colors.inputBackground,

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { CalendarPlus } from "lucide-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 import staticEvents from "../../data/events.json";
 import { getEvents, fetchAndCacheEvents } from "../../utils/eventsManager";
 import EventCalendar from "../../components/EventCalendar";
 import EventList from "../../components/EventList";
+import CalendarSubscriptions from "../../components/CalendarSubscriptions";
 import { useEffect } from "react";
 
 export default function EventsScreen() {
@@ -17,6 +19,7 @@ export default function EventsScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [viewMode, setViewMode] = useState("calendar");
   const [calendarSelectedDate, setCalendarSelectedDate] = useState(null);
+  const [showSubscriptions, setShowSubscriptions] = useState(false);
 
   useEffect(() => {
     // 1. Load from cache (fast)
@@ -150,7 +153,14 @@ export default function EventsScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerTitle}> Events </Text>
+          <Text style={styles.headerTitle}>Events</Text>
+          <TouchableOpacity
+            onPress={() => setShowSubscriptions(true)}
+            style={styles.subscribeButton}
+            activeOpacity={0.6}
+          >
+            <CalendarPlus size={22} color={theme.colors.text} />
+          </TouchableOpacity>
         </View>
 
         {/* Native iOS Segmented Control */}
@@ -196,6 +206,12 @@ export default function EventsScreen() {
           />
         )}
       </ScrollView>
+
+      {/* Calendar Subscriptions Modal */}
+      <CalendarSubscriptions
+        visible={showSubscriptions}
+        onClose={() => setShowSubscriptions(false)}
+      />
     </View>
   );
 }
@@ -213,12 +229,23 @@ const createStyles = (theme) => {
       paddingHorizontal: 20,
     },
     header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
       marginBottom: 24,
     },
     headerTitle: {
       fontSize: 34,
       fontWeight: "700",
       color: theme.colors.text,
+    },
+    subscribeButton: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      backgroundColor: theme.colors.inputBackground,
+      justifyContent: "center",
+      alignItems: "center",
     },
     segmentedControlContainer: {
       marginBottom: 20,
