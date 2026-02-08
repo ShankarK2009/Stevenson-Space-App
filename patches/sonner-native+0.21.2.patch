@@ -1,0 +1,38 @@
+diff --git a/node_modules/sonner-native/lib/commonjs/positioner.js b/node_modules/sonner-native/lib/commonjs/positioner.js
+index 63b14fd..0d39878 100644
+--- a/node_modules/sonner-native/lib/commonjs/positioner.js
++++ b/node_modules/sonner-native/lib/commonjs/positioner.js
+@@ -56,8 +56,12 @@ const Positioner = ({
+   }, [position, bottom, top, offset]);
+   const hasChildren = _react.default.Children.count(children) > 0;
+   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactNative.View, {
+-    style: [containerStyle, insetValues, style],
+-    pointerEvents: _reactNative.Platform.OS === 'android' && !hasChildren ? 'none' : 'box-none',
++    ...(_reactNative.Platform.OS === 'web' ? {
++      style: [{ pointerEvents: 'box-none' }, containerStyle, insetValues, style],
++    } : {
++      style: [containerStyle, insetValues, style],
++      pointerEvents: _reactNative.Platform.OS === 'android' && !hasChildren ? 'none' : 'box-none',
++    }),
+     ...props,
+     children: children
+   });
+diff --git a/node_modules/sonner-native/lib/module/positioner.js b/node_modules/sonner-native/lib/module/positioner.js
+index 4421af7..b02d78c 100644
+--- a/node_modules/sonner-native/lib/module/positioner.js
++++ b/node_modules/sonner-native/lib/module/positioner.js
+@@ -51,8 +51,12 @@ export const Positioner = ({
+   }, [position, bottom, top, offset]);
+   const hasChildren = React.Children.count(children) > 0;
+   return /*#__PURE__*/_jsx(View, {
+-    style: [containerStyle, insetValues, style],
+-    pointerEvents: Platform.OS === 'android' && !hasChildren ? 'none' : 'box-none',
++    ...(Platform.OS === 'web' ? {
++      style: [{ pointerEvents: 'box-none' }, containerStyle, insetValues, style],
++    } : {
++      style: [containerStyle, insetValues, style],
++      pointerEvents: Platform.OS === 'android' && !hasChildren ? 'none' : 'box-none',
++    }),
+     ...props,
+     children: children
+   });

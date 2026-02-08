@@ -50,3 +50,8 @@ android/
 .vscode/
 *.swp
 *.swo
+
+# AI Agents
+.agent/
+.agents/
+
