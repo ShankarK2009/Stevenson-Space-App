@@ -109,17 +109,37 @@ export async function scheduleClassNotifications(settings = null) {
             // 1. Class Start Notification
             if (settings.classStart) {
                 // Schedule exactly at start time
+                // console.log("Debug: Scheduling start notification for", period.startTime);
                 if (period.startTime > new Date()) { // Only schedule future events
-                    await Notifications.scheduleNotificationAsync({
-                        content: {
-                            title: `Period ${period.period} Starting`,
-                            body: `Class is starting now.`,
-                        },
-                        trigger: {
-                            date: period.startTime,
-                        },
+                    /*
+                    console.log("Debug: Triggering scheduleNotificationAsync with:", {
+                        date: period.startTime,
+                        type: typeof period.startTime,
+                        isDate: period.startTime instanceof Date
                     });
-                    scheduledCount++;
+                    */
+
+                    // Workaround: Calculate seconds until start and use seconds trigger if Date is failing?
+                    // But first let's see why Date fails. 
+                    // Actually, let's try just passing the timestamp? No, trigger needs Date or object.
+
+                    // Let's try passing seconds to be safe, as it's often more reliable across versions if Date is buggy
+                    const secondsUntil = Math.floor((period.startTime.getTime() - new Date().getTime()) / 1000);
+
+                    if (secondsUntil > 0) {
+                        await Notifications.scheduleNotificationAsync({
+                            content: {
+                                title: `Period ${period.period} Starting`,
+                                body: `Class is starting now.`,
+                            },
+                            trigger: {
+                                type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+                                seconds: secondsUntil,
+                                repeats: false
+                            },
+                        });
+                        scheduledCount++;
+                    }
                 }
             }
 
@@ -130,16 +150,22 @@ export async function scheduleClassNotifications(settings = null) {
                 // Only schedule if the trigger time is in the future AND the class actually started
                 // (Avoid notifications for classes that haven't started yet if the "end warning" is somehow before "now" - unlikely but safe)
                 if (fiveMinutesBeforeEnd > new Date() && fiveMinutesBeforeEnd > period.startTime) {
-                    await Notifications.scheduleNotificationAsync({
-                        content: {
-                            title: `Period ${period.period} Ending Soon`,
-                            body: `Class ends in 5 minutes.`,
-                        },
-                        trigger: {
-                            date: fiveMinutesBeforeEnd,
-                        },
-                    });
-                    scheduledCount++;
+                    const secondsUntilEnd = Math.floor((fiveMinutesBeforeEnd.getTime() - new Date().getTime()) / 1000);
+
+                    if (secondsUntilEnd > 0) {
+                        await Notifications.scheduleNotificationAsync({
+                            content: {
+                                title: `Period ${period.period} Ending Soon`,
+                                body: `Class ends in 5 minutes.`,
+                            },
+                            trigger: {
+                                type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+                                seconds: secondsUntilEnd,
+                                repeats: false
+                            },
+                        });
+                        scheduledCount++;
+                    }
                 }
             }
         }
