@@ -92,76 +92,50 @@ export async function scheduleClassNotifications(settings = null) {
 
     let scheduledCount = 0;
 
-    for (const date of [today, tomorrow]) {
-        const scheduleInfo = getCurrentPeriodInfo(date);
+    // Wrap the loop in a try/catch to ensure one failure doesn't stop everything
+    try {
+        for (const date of [today, tomorrow]) {
+            const scheduleInfo = getCurrentPeriodInfo(date);
 
-        // Skip if no school or no periods (e.g. weekends/holidays)
-        if (!scheduleInfo.isSchoolDay || !scheduleInfo.allPeriods) {
-            continue;
-        }
+            // Skip if no school or no periods (e.g. weekends/holidays)
+            if (!scheduleInfo.isSchoolDay || !scheduleInfo.allPeriods) {
+                continue;
+            }
 
-        const { allPeriods } = scheduleInfo;
+            const { allPeriods } = scheduleInfo;
 
-        for (const period of allPeriods) {
-            // Skip special periods if needed, or non-numeric if desired?
-            // For now, schedule for all periods returned by scheduleUtils
-
-            // 1. Class Start Notification
-            if (settings.classStart) {
-                // Schedule exactly at start time
-                // console.log("Debug: Scheduling start notification for", period.startTime);
-                if (period.startTime > new Date()) { // Only schedule future events
-                    /*
-                    console.log("Debug: Triggering scheduleNotificationAsync with:", {
-                        date: period.startTime,
-                        type: typeof period.startTime,
-                        isDate: period.startTime instanceof Date
-                    });
-                    */
-
-                    // Workaround: Calculate seconds until start and use seconds trigger if Date is failing?
-                    // But first let's see why Date fails. 
-                    // Actually, let's try just passing the timestamp? No, trigger needs Date or object.
-
-                    // Let's try passing seconds to be safe, as it's often more reliable across versions if Date is buggy
-                    const secondsUntil = Math.floor((period.startTime.getTime() - new Date().getTime()) / 1000);
-
-                    if (secondsUntil > 0) {
+            for (const period of allPeriods) {
+                // 1. Class Start Notification
+                if (settings.classStart) {
+                    if (period.startTime > new Date()) { // Only schedule future events
                         await Notifications.scheduleNotificationAsync({
                             content: {
                                 title: `Period ${period.period} Starting`,
                                 body: `Class is starting now.`,
                             },
                             trigger: {
-                                type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-                                seconds: secondsUntil,
-                                repeats: false
+                                type: Notifications.SchedulableTriggerInputTypes.DATE,
+                                date: period.startTime,
                             },
                         });
                         scheduledCount++;
                     }
                 }
-            }
 
-            // 2. Period End Notification (5 minutes before)
-            if (settings.periodEnd) {
-                const fiveMinutesBeforeEnd = new Date(period.endTime.getTime() - 5 * 60 * 1000);
+                // 2. Period End Notification (5 minutes before)
+                if (settings.periodEnd) {
+                    const fiveMinutesBeforeEnd = new Date(period.endTime.getTime() - 5 * 60 * 1000);
 
-                // Only schedule if the trigger time is in the future AND the class actually started
-                // (Avoid notifications for classes that haven't started yet if the "end warning" is somehow before "now" - unlikely but safe)
-                if (fiveMinutesBeforeEnd > new Date() && fiveMinutesBeforeEnd > period.startTime) {
-                    const secondsUntilEnd = Math.floor((fiveMinutesBeforeEnd.getTime() - new Date().getTime()) / 1000);
-
-                    if (secondsUntilEnd > 0) {
+                    // Only schedule if the trigger time is in the future AND the class actually started
+                    if (fiveMinutesBeforeEnd > new Date() && fiveMinutesBeforeEnd > period.startTime) {
                         await Notifications.scheduleNotificationAsync({
                             content: {
                                 title: `Period ${period.period} Ending Soon`,
                                 body: `Class ends in 5 minutes.`,
                             },
                             trigger: {
-                                type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-                                seconds: secondsUntilEnd,
-                                repeats: false
+                                type: Notifications.SchedulableTriggerInputTypes.DATE,
+                                date: fiveMinutesBeforeEnd,
                             },
                         });
                         scheduledCount++;
@@ -169,6 +143,8 @@ export async function scheduleClassNotifications(settings = null) {
                 }
             }
         }
+    } catch (e) {
+        console.error("Error scheduling notifications:", e);
     }
 
     console.log(`Scheduled ${scheduledCount} notifications for the next 2 days.`);
