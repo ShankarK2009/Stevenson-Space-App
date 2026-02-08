@@ -180,7 +180,7 @@ export default function EventsScreen() {
               color: theme.colors.text
             }}
             style={{
-              backgroundColor: theme.colors.inputBackground,
+              // Native look
             }}
             tintColor={theme.colors.cardBackground}
           />

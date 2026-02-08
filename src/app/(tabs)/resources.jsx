@@ -184,7 +184,7 @@ const createStyles = (theme) => StyleSheet.create({
     marginBottom: 24,
   },
   segmentControl: {
-    backgroundColor: theme.colors.inputBackground,
+    // Native look
   },
   linkCard: {
     backgroundColor: theme.colors.cardBackground,
