@@ -1,14 +1,14 @@
 [
   {
-    "date": "1/5/2026",
-    "comfortFood": "Institute Day",
-    "mindful": "",
-    "sides": "",
+    "date": "2/2/2026",
+    "comfortFood": "Vegetarian Paella",
+    "mindful": "Baked Chicken Parmesan",
+    "sides": "Broccolini Pasta",
     "internationalStation": "Burrito",
-    "soup": ""
+    "soup": "Italian Wedding, Cream of Potato"
   },
   {
-    "date": "1/6/2026",
+    "date": "2/3/2026",
     "comfortFood": "3 Cheese Penne",
     "mindful": "Biryani Chicken",
     "sides": "Lemon Pepper Green Beans, Yellow Rice",
@@ -16,7 +16,7 @@
     "soup": "Italian Wedding, Cream of Potato"
   },
   {
-    "date": "1/7/2026",
+    "date": "2/4/2026",
     "comfortFood": "Falafel Sandwich Pita/ Tom & onions",
     "mindful": "Gyro Sandwich/ Pita/ Tom & onions",
     "sides": "Cucumber salad/ tzatziki sauce, Lemon Rice",
@@ -24,7 +24,7 @@
     "soup": "Italian Wedding, Cream of Potato"
   },
   {
-    "date": "1/8/2026",
+    "date": "2/5/2026",
     "comfortFood": "Fried Chicken",
     "mindful": "Chopped Steak w/ Onion Gravy",
     "sides": "Asparagus, Scalloped Potatoes",
@@ -32,7 +32,7 @@
     "soup": "Italian Wedding, Cream of Potato"
   },
   {
-    "date": "1/9/2026",
+    "date": "2/6/2026",
     "comfortFood": "Baked Turkey Meatloaf w/ Chipotle BBQ***",
     "mindful": "Cajun Shrimp Pasta",
     "sides": "Roasted Vegetables, Whipped Sweet Potatoes",
@@ -40,7 +40,7 @@
     "soup": "Italian Wedding, Cream of Potato"
   },
   {
-    "date": "1/12/2026",
+    "date": "2/9/2026",
     "comfortFood": "Spicy Spaghetti",
     "mindful": "Chicken Marsala",
     "sides": "Lemon Pepper Green Beans, Roasted Potatoes",
@@ -48,7 +48,7 @@
     "soup": "Minestrone, Chicken Gumbo"
   },
   {
-    "date": "1/13/2026",
+    "date": "2/10/2026",
     "comfortFood": "Swedish Meatballs w/ Egg Noodles",
     "mindful": "Chicken Tikka Masala",
     "sides": "Roasted Zucchini, Lime Cilantro Rice",
@@ -56,7 +56,7 @@
     "soup": "Minestrone, Chicken Gumbo"
   },
   {
-    "date": "1/14/2026",
+    "date": "2/11/2026",
     "comfortFood": "Cheese Enchilada Casserole",
     "mindful": "Chipotle Orange Chicken",
     "sides": "Roasted Broccolini, Rice Pilaf",
@@ -64,7 +64,7 @@
     "soup": "Minestrone, Chicken Gumbo"
   },
   {
-    "date": "1/15/2026",
+    "date": "2/12/2026",
     "comfortFood": "Vegetable Pot Pie Over Biscuit",
     "mindful": "Adobo Roasted Turkey Breast***",
     "sides": "Corn, Cauliflower",
@@ -72,7 +72,7 @@
     "soup": "Minestrone, Chicken Gumbo"
   },
   {
-    "date": "1/16/2026",
+    "date": "2/13/2026",
     "comfortFood": "Baked Battered Cod",
     "mindful": "Chicken Vesuvio",
     "sides": "Roasted Vegetables, Roasted Wedge Potatoes",
@@ -80,47 +80,47 @@
     "soup": "Minestrone, Chicken Gumbo"
   },
   {
-    "date": "1/19/2026",
+    "date": "2/16/2026",
     "comfortFood": "",
     "mindful": "",
     "sides": "",
-    "internationalStation": "Asian",
+    "internationalStation": "",
     "soup": ""
   },
   {
-    "date": "1/20/2026",
+    "date": "2/17/2026",
     "comfortFood": "Chicken Shawarma w/ Pita",
     "mindful": "Gyro W/ Pita",
     "sides": "Simple Green Salad, Lemon Rice/ Tzatziki Sauce",
-    "internationalStation": "Asian",
+    "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
   },
   {
-    "date": "1/21/2026",
+    "date": "2/18/2026",
     "comfortFood": "Homemade Beef Meatloaf",
     "mindful": "Roast Turkey Breast ***",
     "sides": "Roasted Carrots and Broccoli, Mashed Potatoes",
-    "internationalStation": "Asian",
+    "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
   },
   {
-    "date": "1/22/2026",
+    "date": "2/19/2026",
     "comfortFood": "Baked Mostaccioli",
     "mindful": "Chicken Tinga",
     "sides": "Azteca Corn, Mexican Rice",
-    "internationalStation": "Asian",
+    "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
   },
   {
-    "date": "1/23/2026",
+    "date": "2/20/2026",
     "comfortFood": "BBQ Pulled Chicken Sandwich",
     "mindful": "Southwest Beef Mac w/ Cheese ***",
     "sides": "Roasted Vegetables, Potato Wedges",
-    "internationalStation": "Asian",
+    "internationalStation": "ASIAN",
     "soup": "Smoky Poblano, Chicken Noodle"
   },
   {
-    "date": "1/26/2026",
+    "date": "2/23/2026",
     "comfortFood": "Blackened Tilapia",
     "mindful": "Jerk Chicken",
     "sides": "Brussel Sprouts, Scalloped Potatoes",
@@ -128,15 +128,15 @@
     "soup": "Tomato Basil Bisque, Broccoli Cheddar"
   },
   {
-    "date": "1/27/2026",
+    "date": "2/24/2026",
     "comfortFood": "Veggie Chilaquiles",
-    "mindful": "Chicken Cordon Bleu",
+    "mindful": "Chicken Cordon Bleu ***",
     "sides": "Roasted Carrots, Cilantro Lime Rice",
     "internationalStation": "Pasta",
     "soup": "Tomato Basil Bisque, Broccoli Cheddar"
   },
   {
-    "date": "1/28/2026",
+    "date": "2/25/2026",
     "comfortFood": "Chicken Tetrazzini",
     "mindful": "Tortilla Crusted Tilapia",
     "sides": "Zucchini, Orzo",
@@ -144,7 +144,7 @@
     "soup": "Tomato Basil Bisque, Broccoli Cheddar"
   },
   {
-    "date": "1/29/2026",
+    "date": "2/26/2026",
     "comfortFood": "Turkey Sloppy Joe ***",
     "mindful": "Dijon Chicken",
     "sides": "Broccoli & carrots, Mashed Potatoes",
@@ -152,11 +152,11 @@
     "soup": "Tomato Basil Bisque, Broccoli Cheddar"
   },
   {
-    "date": "1/30/2026",
-    "comfortFood": "Roasted Italian Chicken Thigh ***",
-    "mindful": "Baked Herbed Cod",
-    "sides": "Roasted Vegetables, Rice Pilaf",
-    "internationalStation": "Pasta",
-    "soup": "Tomato Basil Bisque, Broccoli Cheddar"
+    "date": "2/27/2026",
+    "comfortFood": "",
+    "mindful": "",
+    "sides": "",
+    "internationalStation": "",
+    "soup": ""
   }
 ]
