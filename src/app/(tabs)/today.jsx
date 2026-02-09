@@ -91,7 +91,7 @@ export default function TodayScreen() {
         contentContainerStyle={[
           styles.scrollContent,
           {
-            paddingTop: insets.top + 20,
+            paddingTop: Platform.OS === "android" ? insets.top + 20 : 20,
             paddingBottom: insets.bottom + 100,
           },
         ]}

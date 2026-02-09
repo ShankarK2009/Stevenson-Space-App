@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, Switch, Modal, Linking, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Switch, Modal, Linking, TouchableWithoutFeedback, StyleSheet, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Bell, Info, X, Github, ExternalLink, Code } from "lucide-react-native";
@@ -40,7 +40,7 @@ export default function SettingsScreen() {
         contentContainerStyle={[
           styles.scrollContent,
           {
-            paddingTop: insets.top + 20,
+            paddingTop: Platform.OS === "android" ? insets.top + 20 : 20,
             paddingBottom: insets.bottom + 100,
           },
         ]}

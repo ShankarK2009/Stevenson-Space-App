@@ -7,6 +7,7 @@ import {
   Linking,
   Image,
   StyleSheet,
+  Platform,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -80,7 +81,7 @@ export default function ResourcesScreen() {
         contentContainerStyle={[
           styles.scrollContent,
           {
-            paddingTop: insets.top + 20,
+            paddingTop: Platform.OS === "android" ? insets.top + 20 : 20,
             paddingBottom: insets.bottom + 100,
           },
         ]}
