@@ -137,7 +137,7 @@ export default function EventsScreen() {
   const styles = createStyles(theme);
 
   return (
-    <View style={styles.container}>
+    <View collapsable={false} style={styles.container}>
       <StatusBar style={theme.colors.statusBarStyle} />
 
       <ScrollView

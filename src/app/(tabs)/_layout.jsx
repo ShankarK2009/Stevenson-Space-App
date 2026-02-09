@@ -17,24 +17,24 @@ export default function TabLayout() {
             }}
             blurEffect={theme.isDark ? "systemChromeMaterialDark" : "systemChromeMaterialLight"}
         >
-            <NativeTabs.Trigger name="today">
+            <NativeTabs.Trigger name="today" disableTransparentOnScrollEdge>
                 <Label>Today</Label>
-                <Icon sf="house.fill" drawable="ic_home" />
+                <Icon sf="house.fill" md="home" />
             </NativeTabs.Trigger>
 
-            <NativeTabs.Trigger name="events">
+            <NativeTabs.Trigger name="events" disableTransparentOnScrollEdge>
                 <Label>Events</Label>
-                <Icon sf="calendar" drawable="ic_calendar_month" />
+                <Icon sf="calendar" md="calendar_month" />
             </NativeTabs.Trigger>
 
-            <NativeTabs.Trigger name="resources">
+            <NativeTabs.Trigger name="resources" disableTransparentOnScrollEdge>
                 <Label>Resources</Label>
-                <Icon sf="book.fill" drawable="ic_book2" />
+                <Icon sf="book.fill" md="menu_book" />
             </NativeTabs.Trigger>
 
-            <NativeTabs.Trigger name="settings">
+            <NativeTabs.Trigger name="settings" disableTransparentOnScrollEdge>
                 <Label>Settings</Label>
-                <Icon sf="gear" drawable="ic_settings" />
+                <Icon sf="gear" md="settings" />
             </NativeTabs.Trigger>
         </NativeTabs>
     );
