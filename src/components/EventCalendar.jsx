@@ -235,6 +235,7 @@ const createStyles = (theme) => StyleSheet.create({
         backgroundColor: "transparent",
         justifyContent: "center",
         alignItems: "center",
+        overflow: "hidden", // Fixes square highlight on Android
     },
     dayCircleSelected: {
         backgroundColor: theme.colors.stevensonGold,
