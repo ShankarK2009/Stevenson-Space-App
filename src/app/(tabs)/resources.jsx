@@ -43,9 +43,7 @@ export default function ResourcesScreen() {
     {
       name: "Peer Tutors",
       url: "https://sites.google.com/d125.org/peer-tutors/content-database",
-      image: theme.isDark
-        ? require("../../../assets/logos/peer_tutors_dark.png")
-        : require("../../../assets/logos/peer_tutors_light.png"),
+      icon: "🤝",
     },
     {
       name: "Patriot Dollars",
