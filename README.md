@@ -1,10 +1,11 @@
+
 # Stevenson Space App
 
 Welcome to **Stevenson Space**, a student companion app designed for Stevenson High School. Built for speed, elegance, and utility, Stevenson Space aims to keep you organized and informed throughout the school day.
 
 > [!WARNING]
 > **Current Status: Alpha Stage**
-> The app is currently in active development (Alpha). You will likely encounter bugs and unfinished features.
+> The app is currently in active development. You will likely encounter bugs and unfinished features.
 
 ---
 
@@ -31,50 +32,64 @@ Welcome to **Stevenson Space**, a student companion app designed for Stevenson H
 
 ## 🗺 Roadmap
 
-### Version 1.0 (Production Launch)
+## Version 1.0  
+- [x] Add an option to sync with the default Calendar  
+- [x] Make settings functional  
+    - [x] Notifications when class starts  
+    - [x] Notifications when the period ends  
+- [x] Change icons on quick links  
+- [ ] Change icons in Calendar Sync  
+- [ ] Improve the look of the Lunch Menu  
+- [ ] Make sure notifications actually work  
+  
+---
 
-- [ ] Add analytics tracking via PostHog
-- [ ] Add an option to sync with Apple / Google Calendar
-  - Just an ICS link, with the option to choose what type of events to include
-- [ ] Make settings functional
-  - Notifications when the period ends
-  - Notifications when class starts
-- [ ] Update design of “Today” tab to look more like [stevenson.space](https://stevenson.space/) mobile version
-- [ ] Change icons on quick links
+## Version 1.1  
+- [ ] Add the ability to customize notifications. Add the option:  
+    - [ ] Notifications “**x”** mins before period ends  
+- [ ] Add analytics tracking via PostHog  
+- [ ] Add feedback board support  
+  
+---
 
-### Version 1.1
+## Version 2.0  
+- [ ] Update the design of the “Today” tab to look more like [stevenson.space](https://stevenson.space/) mobile version  
+- [ ] Add the ability to add a personal schedule (rename classes)  
+- [ ] Add more in-built themes  
+- [ ] Add “Coming this week” events on the Today tab  
+  
+---
 
-- [ ] Add the ability to customize notifications. Options:
-  - Notifications when the period ends
-  - Notifications when class starts
-  - Notifications “**x”** mins before period ends
-- [ ] Add feedback board support
+## Version 2.1  
+- [ ] Add ability for custom themes (change colors)  
+- [ ] Give people an option to customize what they want on the “Today” tab  
+    - [ ] Ex: Lunch menu, PWC Schedule, Today’s events, or events for the week  
+  
+---
 
-### Version 2.0
+## Version 2.1.1  
+- [ ] Add the option to customize notifications to account for the traveller bell for certain periods  
+  
+---
 
-- [ ] Add the ability to add a personal schedule (rename classes)
-- [ ] Add more in-built themes
-- [ ] Add “Coming this week” events on the Today tab
+## Version 2.1.2  
+- [ ] Add the ability to add gradient-like themes  
+  
+---
 
-### Version 2.1
+## Version 2.2  
+- [ ] Add widgets on iOS and Android  
+- [ ] Add live activities  
+- [ ] Add Dynamic Island support  
+  
+---
 
-- [ ] Add ability for custom themes
-- [ ] Give people an option to customize what they want on the “Today” tab
-  - Ex: Lunch menu, PWC Schedule, Today’s events, or events for the week
-
-### Version 3.0
-
-- [ ] Add widgets on iOS and Android
-- [ ] Add live activities
-- [ ] Add Dynamic Island support
-
-### Version 3.5
-
-- [ ] Add simple onboarding flow
-  - Explanation of app
-  - Option to customize schedule (add class names)
-  - Customize notification behavior
-  - Prompt on Widgets, Live activities, and Dynamic Island
+## Version 2.3  
+- [ ] Add a simple onboarding flow  
+    - [ ] Explanation of the app  
+    - [ ] Option to customize schedule (add class names)  
+    - [ ] Customize notification behavior  
+    - [ ] Prompt on Widgets, Live activities, and Dynamic Island
 
 ---
 
