@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { View, Text, ScrollView, Alert, Platform, ActionSheetIOS, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 import {
   getCurrentPeriodInfo,
@@ -17,6 +18,7 @@ import PWCCard from "../../components/PWCCard";
 export default function TodayScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const posthog = usePostHog();
   const styles = createStyles(theme);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [periodInfo, setPeriodInfo] = useState(null);
@@ -37,6 +39,16 @@ export default function TodayScreen() {
     return () => clearInterval(interval);
   }, [scheduleMode]);
 
+  // Handle schedule mode selection with tracking
+  const handleScheduleModeChange = useCallback((newMode) => {
+    posthog.capture("schedule_mode_changed", {
+      new_mode: newMode,
+      previous_mode: scheduleMode ?? "auto",
+      available_modes: periodInfo?.schedule?.allModes ?? [],
+    });
+    setScheduleMode(newMode);
+  }, [posthog, scheduleMode, periodInfo?.schedule?.allModes]);
+
   // Handle schedule mode change
   const handleModePress = useCallback(() => {
     if (!periodInfo?.schedule?.allModes || periodInfo.schedule.allModes.length <= 1) {
@@ -55,7 +67,7 @@ export default function TodayScreen() {
         },
         (buttonIndex) => {
           if (buttonIndex < modes.length) {
-            setScheduleMode(modes[buttonIndex]);
+            handleScheduleModeChange(modes[buttonIndex]);
           }
         }
       );
@@ -66,11 +78,11 @@ export default function TodayScreen() {
         "Choose a schedule for today",
         modes.map(mode => ({
           text: mode,
-          onPress: () => setScheduleMode(mode)
+          onPress: () => handleScheduleModeChange(mode)
         })).concat({ text: "Cancel", style: "cancel" })
       );
     }
-  }, [periodInfo?.schedule?.allModes]);
+  }, [periodInfo?.schedule?.allModes, handleScheduleModeChange]);
 
   // Memoize date string and lunch lookup to avoid recalculating every second
   const dateString = useMemo(() =>

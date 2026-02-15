@@ -3,11 +3,13 @@ import { View, Text, ScrollView, TouchableOpacity, Switch, Modal, Linking, Touch
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Bell, Info, X, Github, ExternalLink, Code } from "lucide-react-native";
+import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const posthog = usePostHog();
   const styles = createStyles(theme);
   const [aboutVisible, setAboutVisible] = React.useState(false);
   const [notificationSettings, setNotificationSettings] = React.useState({
@@ -23,12 +25,31 @@ export default function SettingsScreen() {
   }, []);
 
   const toggleSetting = async (key) => {
-    const newSettings = { ...notificationSettings, [key]: !notificationSettings[key] };
+    const newValue = !notificationSettings[key];
+    const newSettings = { ...notificationSettings, [key]: newValue };
     setNotificationSettings(newSettings);
+
+    // Track notification setting toggle
+    posthog.capture("notification_setting_toggled", {
+      setting_name: key,
+      new_value: newValue,
+    });
 
     // Save and reschedule
     const { saveNotificationSettings } = await import("../../utils/notificationUtils");
     await saveNotificationSettings(newSettings);
+  };
+
+  const handleOpenAbout = () => {
+    posthog.capture("about_modal_opened");
+    setAboutVisible(true);
+  };
+
+  const handleGithubLinkClick = () => {
+    posthog.capture("github_link_clicked", {
+      url: "https://github.com/ShankarK2009/Stevenson-Space-App",
+    });
+    Linking.openURL("https://github.com/ShankarK2009/Stevenson-Space-App");
   };
 
   return (
@@ -95,8 +116,9 @@ export default function SettingsScreen() {
         <View style={styles.card}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => setAboutVisible(true)}
+            onPress={handleOpenAbout}
             style={styles.aboutButton}
+            testID="about-button"
           >
             <Info size={22} color={theme.colors.stevensonGold} />
             <View style={styles.settingTextContainer}>
@@ -155,9 +177,10 @@ export default function SettingsScreen() {
               </View>
 
               <TouchableOpacity
-                onPress={() => Linking.openURL('https://github.com/ShankarK2009/Stevenson-Space-App')}
+                onPress={handleGithubLinkClick}
                 activeOpacity={0.7}
                 style={styles.githubButton}
+                testID="github-link-button"
               >
                 <View style={styles.githubButtonContent}>
                   <Github size={20} color={theme.colors.text} />

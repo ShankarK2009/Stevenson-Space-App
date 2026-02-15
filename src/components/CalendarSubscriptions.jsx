@@ -10,11 +10,13 @@ import {
 } from "react-native";
 import { Calendar, Star, X, ChevronRight } from "lucide-react-native";
 import * as Linking from "expo-linking";
+import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../contexts/ThemeContext";
 import calendarFeeds from "../data/calendarFeeds.json";
 
 export default function CalendarSubscriptions({ visible, onClose }) {
     const theme = useTheme();
+    const posthog = usePostHog();
 
     // Sort: recommended first, then alphabetically
     const sortedFeeds = [...calendarFeeds].sort((a, b) => {
@@ -24,6 +26,13 @@ export default function CalendarSubscriptions({ visible, onClose }) {
     });
 
     const handleSubscribe = (feed) => {
+        // Track calendar subscription selection
+        posthog.capture("calendar_subscription_selected", {
+            calendar_name: feed.name,
+            calendar_id: feed.id,
+            is_recommended: feed.recommended ?? false,
+        });
+
         const buttons = [];
 
         if (Platform.OS === "ios") {

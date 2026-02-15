@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { usePostHog } from 'posthog-react-native';
 import { useAuthStore } from './store';
 
 const callbackUrl = '/api/auth/token';
@@ -13,8 +14,27 @@ const callbackQueryString = `callbackUrl=${callbackUrl}`;
 export const AuthWebView = ({ mode, proxyURL, baseURL }) => {
   const [currentURI, setURI] = useState(`${baseURL}/account/${mode}?${callbackQueryString}`);
   const { auth, setAuth, isReady } = useAuthStore();
+  const posthog = usePostHog();
   const isAuthenticated = isReady ? !!auth : null;
   const iframeRef = useRef(null);
+
+  // Helper to track auth success and identify user
+  const handleAuthSuccess = (authData, authMode) => {
+    const eventName = authMode === 'signin' ? 'user_signed_in' : 'user_signed_up';
+    posthog.capture(eventName, {
+      auth_method: 'webview',
+    });
+
+    // Identify the user in PostHog
+    if (authData.user?.id) {
+      posthog.identify(authData.user.id, {
+        email: authData.user.email,
+        name: authData.user.name,
+      });
+    }
+
+    setAuth(authData);
+  };
   useEffect(() => {
     if (Platform.OS === 'web') {
       return;
@@ -40,10 +60,10 @@ export const AuthWebView = ({ mode, proxyURL, baseURL }) => {
         return;
       }
       if (event.data.type === 'AUTH_SUCCESS') {
-        setAuth({
+        handleAuthSuccess({
           jwt: event.data.jwt,
           user: event.data.user,
-        });
+        }, mode);
       } else if (event.data.type === 'AUTH_ERROR') {
         console.error('Auth error:', event.data.error);
       }
@@ -54,7 +74,7 @@ export const AuthWebView = ({ mode, proxyURL, baseURL }) => {
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [setAuth]);
+  }, [setAuth, mode, handleAuthSuccess]);
 
   if (Platform.OS === 'web') {
     const handleIframeError = () => {
@@ -87,7 +107,7 @@ export const AuthWebView = ({ mode, proxyURL, baseURL }) => {
         if (request.url === `${baseURL}${callbackUrl}`) {
           fetch(request.url).then(async (response) => {
             response.json().then((data) => {
-              setAuth({ jwt: data.jwt, user: data.user });
+              handleAuthSuccess({ jwt: data.jwt, user: data.user }, mode);
             });
           });
           return false;

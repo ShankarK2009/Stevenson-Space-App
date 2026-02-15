@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 import { useCallback, useEffect } from 'react';
 import { useAuthModal, useAuthStore, authKey } from './store';
+import { posthog } from '../../config/posthog';
 
 
 /**
@@ -32,9 +33,13 @@ export const useAuth = () => {
   }, [open]);
 
   const signOut = useCallback(() => {
+    // Track sign out event before resetting PostHog
+    posthog.capture('user_signed_out');
+    // Reset PostHog to unlink future events from this user
+    posthog.reset();
     setAuth(null);
     close();
-  }, [close]);
+  }, [close, setAuth]);
 
   return {
     isReady,

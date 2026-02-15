@@ -13,6 +13,7 @@ import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BookOpen, ExternalLink } from "lucide-react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 
 import documentsData from "../../data/documents.json";
@@ -20,6 +21,7 @@ import documentsData from "../../data/documents.json";
 export default function ResourcesScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const posthog = usePostHog();
   const styles = createStyles(theme);
   const [selectedTab, setSelectedTab] = useState("links");
 
@@ -53,7 +55,37 @@ export default function ResourcesScreen() {
     },
   ];
 
-  const handleLinkPress = async (url) => {
+  const handleResourceClick = async (resourceName, url) => {
+    posthog.capture("external_resource_clicked", {
+      resource_name: resourceName,
+      url: url,
+    });
+
+    if (!url || url === "#") {
+      alert("This resource is coming soon!");
+      return;
+    }
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        alert(`Cannot open this URL: ${url}`);
+      }
+    } catch (error) {
+      console.error("Failed to open URL:", error);
+      alert("An error occurred while trying to open the link.");
+    }
+  };
+
+  const handleDocumentClick = async (documentTitle, category, url) => {
+    posthog.capture("document_link_clicked", {
+      document_title: documentTitle,
+      category: category,
+      url: url,
+    });
+
     if (!url || url === "#") {
       alert("This resource is coming soon!");
       return;
@@ -112,9 +144,10 @@ export default function ResourcesScreen() {
             {quickLinks.map((link, index) => (
               <TouchableOpacity
                 key={index}
-                onPress={() => handleLinkPress(link.url)}
+                onPress={() => handleResourceClick(link.name, link.url)}
                 activeOpacity={0.6}
                 style={styles.linkCard}
+                testID={`resource-link-${link.name.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <View style={styles.linkContent}>
                   {link.image ? (
@@ -140,9 +173,10 @@ export default function ResourcesScreen() {
                 {items.map((doc, docIndex) => (
                   <TouchableOpacity
                     key={docIndex}
-                    onPress={() => handleLinkPress(doc.link)}
+                    onPress={() => handleDocumentClick(doc.title, className, doc.link)}
                     activeOpacity={0.6}
                     style={styles.documentCard}
+                    testID={`document-link-${docIndex}`}
                   >
                     <View style={styles.documentContent}>
                       <BookOpen size={18} color={theme.colors.textSecondary} />

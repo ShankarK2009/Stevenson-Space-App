@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { CalendarPlus } from "lucide-react-native";
+import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
 import staticEvents from "../../data/events.json";
 import { getEvents, fetchAndCacheEvents } from "../../utils/eventsManager";
 import EventCalendar from "../../components/EventCalendar";
 import EventList from "../../components/EventList";
 import CalendarSubscriptions from "../../components/CalendarSubscriptions";
-import { useEffect } from "react";
 
 export default function EventsScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const posthog = usePostHog();
   const [eventsData, setEventsData] = useState(staticEvents);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [viewMode, setViewMode] = useState("calendar");
@@ -156,9 +157,13 @@ export default function EventsScreen() {
           <Text style={styles.headerTitle}>Events</Text>
           {Platform.OS === "ios" && (
             <TouchableOpacity
-              onPress={() => setShowSubscriptions(true)}
+              onPress={() => {
+                posthog.capture("calendar_subscriptions_opened");
+                setShowSubscriptions(true);
+              }}
               style={styles.subscribeButton}
               activeOpacity={0.6}
+              testID="calendar-subscriptions-button"
             >
               <CalendarPlus size={22} color={theme.colors.text} />
             </TouchableOpacity>
@@ -171,7 +176,12 @@ export default function EventsScreen() {
             values={["Calendar", "List"]}
             selectedIndex={viewMode === "calendar" ? 0 : 1}
             onChange={(event) => {
-              setViewMode(event.nativeEvent.selectedSegmentIndex === 0 ? "calendar" : "list");
+              const newMode = event.nativeEvent.selectedSegmentIndex === 0 ? "calendar" : "list";
+              posthog.capture("events_view_changed", {
+                view_mode: newMode,
+                previous_mode: viewMode,
+              });
+              setViewMode(newMode);
             }}
             fontStyle={{
               color: theme.colors.text
