@@ -1,6 +1,8 @@
 export default {
   expo: {
     name: "Stevenson Space",
+    owner: "shankark2009",
+    slug: "stevenson-space-app",
     version: "1.0.0",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
@@ -58,6 +60,9 @@ export default {
       typedRoutes: true,
     },
     extra: {
+      eas: {
+        projectId: "56c0ad0f-6ed1-4e14-bbc8-ecf76cfc99bb",
+      },
       router: {
         origin: false,
       },
