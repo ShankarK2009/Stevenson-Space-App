@@ -8,6 +8,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
+      "icon": "./assets/images/iphone_icon.icon",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
