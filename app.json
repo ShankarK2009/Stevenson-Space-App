@@ -7,8 +7,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "icon": "./assets/images/iphone_icon.icon",
+      "supportsTablet": false,
+      "icon": "./assets/images/adaptive-icon.png",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundImage": "./assets/images/android-background.png"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO",
