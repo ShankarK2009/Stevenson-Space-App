@@ -5,11 +5,11 @@ export default {
     slug: "stevenson-space-app",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/images/icon.png",
+    icon: "./assets/images/adaptive-icon.png",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
     ios: {
-      supportsTablet: true,
+      supportsTablet: false,
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
@@ -19,7 +19,7 @@ export default {
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
-        backgroundColor: "#ffffff",
+        backgroundImage: "./assets/images/android-background.png",
       },
       permissions: [
         "android.permission.RECORD_AUDIO",
@@ -54,7 +54,6 @@ export default {
       "expo-secure-store",
       "expo-web-browser",
       "expo-asset",
-      "expo-localization",
     ],
     experiments: {
       typedRoutes: true,
