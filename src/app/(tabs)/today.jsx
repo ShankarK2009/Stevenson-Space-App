@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
+import Analytics from "../../utils/analyticsUtils";
 import {
   getCurrentPeriodInfo,
   getNextSchoolDayInfo,
@@ -41,7 +42,7 @@ export default function TodayScreen() {
 
   // Handle schedule mode selection with tracking
   const handleScheduleModeChange = useCallback((newMode) => {
-    posthog.capture("schedule_mode_changed", {
+    Analytics.capture("schedule_mode_changed", {
       new_mode: newMode,
       previous_mode: scheduleMode ?? "auto",
       available_modes: periodInfo?.schedule?.allModes ?? [],

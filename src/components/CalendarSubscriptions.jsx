@@ -12,6 +12,7 @@ import { Calendar, Star, X, ChevronRight } from "lucide-react-native";
 import * as Linking from "expo-linking";
 import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../contexts/ThemeContext";
+import Analytics from "../utils/analyticsUtils";
 import calendarFeeds from "../data/calendarFeeds.json";
 
 export default function CalendarSubscriptions({ visible, onClose }) {
@@ -27,10 +28,11 @@ export default function CalendarSubscriptions({ visible, onClose }) {
 
     const handleSubscribe = (feed) => {
         // Track calendar subscription selection
-        posthog.capture("calendar_subscription_selected", {
+        Analytics.capture("calendar_subscription_selected", {
             calendar_name: feed.name,
             calendar_id: feed.id,
             is_recommended: feed.recommended ?? false,
+            platform: Platform.OS,
         });
 
         const buttons = [];
@@ -42,6 +44,11 @@ export default function CalendarSubscriptions({ visible, onClose }) {
                     try {
                         await Linking.openURL(feed.webcalUrl);
                     } catch (error) {
+                        Analytics.trackError(error, {
+                            context: "calendar_subscription_opening",
+                            calendar_name: feed.name,
+                            url: feed.webcalUrl,
+                        });
                         Alert.alert("Error", "Could not open calendar app");
                     }
                 },

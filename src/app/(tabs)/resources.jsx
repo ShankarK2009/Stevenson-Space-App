@@ -15,6 +15,7 @@ import { BookOpen, ExternalLink } from "lucide-react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
+import Analytics from "../../utils/analyticsUtils";
 
 import documentsData from "../../data/documents.json";
 
@@ -56,10 +57,7 @@ export default function ResourcesScreen() {
   ];
 
   const handleResourceClick = async (resourceName, url) => {
-    posthog.capture("external_resource_clicked", {
-      resource_name: resourceName,
-      url: url,
-    });
+    Analytics.trackLink(url, resourceName, "external_resource");
 
     if (!url || url === "#") {
       alert("This resource is coming soon!");
@@ -71,20 +69,18 @@ export default function ResourcesScreen() {
       if (supported) {
         await Linking.openURL(url);
       } else {
+        Analytics.trackError(`Cannot open URL: ${url}`, { context: "resource_click", resourceName });
         alert(`Cannot open this URL: ${url}`);
       }
     } catch (error) {
+      Analytics.trackError(error, { context: "resource_click", resourceName, url });
       console.error("Failed to open URL:", error);
       alert("An error occurred while trying to open the link.");
     }
   };
 
   const handleDocumentClick = async (documentTitle, category, url) => {
-    posthog.capture("document_link_clicked", {
-      document_title: documentTitle,
-      category: category,
-      url: url,
-    });
+    Analytics.trackLink(url, documentTitle, "document");
 
     if (!url || url === "#") {
       alert("This resource is coming soon!");
@@ -96,9 +92,11 @@ export default function ResourcesScreen() {
       if (supported) {
         await Linking.openURL(url);
       } else {
+        Analytics.trackError(`Cannot open document URL: ${url}`, { context: "document_click", documentTitle });
         alert(`Cannot open this URL: ${url}`);
       }
     } catch (error) {
+      Analytics.trackError(error, { context: "document_click", documentTitle, url });
       console.error("Failed to open URL:", error);
       alert("An error occurred while trying to open the link.");
     }

@@ -6,6 +6,7 @@ import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import { CalendarPlus } from "lucide-react-native";
 import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
+import Analytics from "../../utils/analyticsUtils";
 import staticEvents from "../../data/events.json";
 import { getEvents, fetchAndCacheEvents } from "../../utils/eventsManager";
 import EventCalendar from "../../components/EventCalendar";
@@ -158,7 +159,7 @@ export default function EventsScreen() {
           {Platform.OS === "ios" && (
             <TouchableOpacity
               onPress={() => {
-                posthog.capture("calendar_subscriptions_opened");
+                Analytics.capture("calendar_subscriptions_opened");
                 setShowSubscriptions(true);
               }}
               style={styles.subscribeButton}
@@ -177,9 +178,10 @@ export default function EventsScreen() {
             selectedIndex={viewMode === "calendar" ? 0 : 1}
             onChange={(event) => {
               const newMode = event.nativeEvent.selectedSegmentIndex === 0 ? "calendar" : "list";
-              posthog.capture("events_view_changed", {
+              Analytics.capture("events_view_changed", {
                 view_mode: newMode,
                 previous_mode: viewMode,
+                platform: Platform.OS,
               });
               setViewMode(newMode);
             }}

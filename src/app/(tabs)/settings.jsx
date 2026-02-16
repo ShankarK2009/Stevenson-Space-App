@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Bell, Info, X, Github, ExternalLink, Code } from "lucide-react-native";
 import { usePostHog } from "posthog-react-native";
 import { useTheme } from "../../contexts/ThemeContext";
+import Analytics from "../../utils/analyticsUtils";
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
@@ -30,9 +31,10 @@ export default function SettingsScreen() {
     setNotificationSettings(newSettings);
 
     // Track notification setting toggle
-    posthog.capture("notification_setting_toggled", {
+    Analytics.capture("notification_setting_toggled", {
       setting_name: key,
       new_value: newValue,
+      platform: Platform.OS,
     });
 
     // Save and reschedule
@@ -41,15 +43,16 @@ export default function SettingsScreen() {
   };
 
   const handleOpenAbout = () => {
-    posthog.capture("about_modal_opened");
+    Analytics.capture("about_modal_opened");
     setAboutVisible(true);
   };
 
   const handleGithubLinkClick = () => {
-    posthog.capture("github_link_clicked", {
-      url: "https://github.com/ShankarK2009/Stevenson-Space-App",
+    const url = "https://github.com/ShankarK2009/Stevenson-Space-App";
+    Analytics.trackLink(url, "Stevenson-Space-App", "github");
+    Linking.openURL(url).catch(err => {
+      Analytics.trackError(err, { context: "github_link_click", url });
     });
-    Linking.openURL("https://github.com/ShankarK2009/Stevenson-Space-App");
   };
 
   return (
