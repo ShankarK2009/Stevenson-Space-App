@@ -19,6 +19,7 @@ function ScheduleList({ periodInfo, handleModePress }) {
                     <TouchableOpacity
                         onPress={handleModePress}
                         style={styles.modeToggle}
+                        testID="schedule-mode-toggle"
                     >
                         <Text style={styles.modeText}>
                             {periodInfo.schedule.mode}
