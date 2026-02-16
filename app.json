@@ -3,12 +3,12 @@
     "name": "Stevenson Space",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
-      "icon": "./assets/images/adaptive-icon.png",
+      "icon": "./assets/images/iphone-icon.icon",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
