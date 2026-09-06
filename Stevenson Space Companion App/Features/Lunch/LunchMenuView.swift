@@ -20,9 +20,8 @@ struct LunchMenuView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollViewReader { scrollProxy in
-                ScrollView {
-                    VStack(spacing: 18) {
+            ScrollView {
+                VStack(spacing: 18) {
                     WeekPicker(
                         weekdays: weekdays,
                         selectedDay: day,
@@ -31,15 +30,14 @@ struct LunchMenuView: View {
                         select: { selectedDay = $0 },
                         moveWeek: moveWeek)
 
-                        sourceStatus
-                        menuContent
-                    }
-                    .id(LunchScrollAnchor.top)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .padding(.bottom, 28)
+                    sourceStatus
+                    menuContent
                 }
-                .background(Color(.systemGroupedBackground))
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+                .padding(.bottom, 28)
+            }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("Lunch")
             .toolbar {
                 if day != preferredDay {
@@ -52,13 +50,6 @@ struct LunchMenuView: View {
             }
             .refreshable {
                 await model.syncLunch(force: true)
-                // SwiftUI can leave a ScrollView at the refresh control's
-                // expanded offset after an async refresh completes. Restore
-                // the visible content to its normal top position.
-                withAnimation(.easeOut(duration: 0.2)) {
-                    scrollProxy.scrollTo(LunchScrollAnchor.top, anchor: .top)
-                }
-            }
             }
         }
     }
@@ -121,10 +112,6 @@ struct LunchMenuView: View {
         let preferredWeekday = min(max((day.weekday() ?? 2) - 2, 0), 4)
         selectedDay = targetWeek.advanced(by: preferredWeekday)
     }
-}
-
-private enum LunchScrollAnchor: Hashable {
-    case top
 }
 
 private struct WeekPicker: View {
