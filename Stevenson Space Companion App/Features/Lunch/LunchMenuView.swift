@@ -30,7 +30,6 @@ struct LunchMenuView: View {
                         select: { selectedDay = $0 },
                         moveWeek: moveWeek)
 
-                    sourceStatus
                     menuContent
                 }
                 .padding(.horizontal, 16)
@@ -67,6 +66,8 @@ struct LunchMenuView: View {
                         LunchStationCard(section: section)
                     }
                 }
+
+                sourceStatus
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         } else if model.lunchMenu == nil {
@@ -86,25 +87,19 @@ struct LunchMenuView: View {
 
     @ViewBuilder
     private var sourceStatus: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            if model.isLunchSyncing {
-                Label("Checking for menu updates…", systemImage: "arrow.clockwise")
-            } else if model.lunchFetchMetadata.lastError != nil {
-                Label("Couldn’t refresh the menu. Pull down to try again.",
-                      systemImage: "wifi.exclamationmark")
-                if model.lunchMenu != nil {
-                    Text(model.lunchFetchMetadata.lastSuccess == nil
-                         ? "Showing the menu included with the app."
-                         : "Showing the last saved menu.")
-                }
-            } else if let checked = model.lunchFetchMetadata.lastSuccess {
-                Label("Menu is up to date.", systemImage: "checkmark.circle")
-                Text("Last checked \(checked.formatted(date: .abbreviated, time: .shortened))")
-            }
+        if model.lunchFetchMetadata.lastSuccess == nil,
+           model.lunchFetchMetadata.lastError != nil {
+            Label("Showing the menu included with the app. Live updates are temporarily unavailable.",
+                  systemImage: "wifi.exclamationmark")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.top, 2)
+        } else if let updated = model.lunchFetchMetadata.lastChanged {
+            Text("Menu updated \(updated.formatted(.relative(presentation: .named)))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.top, 2)
         }
-        .font(.caption)
-        .foregroundStyle(.secondary)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func moveWeek(_ offset: Int) {
