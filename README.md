@@ -99,3 +99,11 @@ The source screenshot is never stored — only the extracted fields (in
 Widgets and Live Activities (ScheduleKit + SharedStore are App-Group-ready; add
 the entitlement + extension targets), BGAppRefresh, appearance settings, ICS
 hint layer.
+
+## Apple Wallet
+
+The ID tab includes a consent-based signed-pass integration. Configure an HTTPS
+pass issuer and Apple Pass Type ID certificate before enabling it; no signing
+credentials ship in the app. Native Code 39 requires iOS 27; earlier iOS versions
+require explicit school-scanner verification of the Code 128 fallback. See
+[Wallet setup, issuer contract, and release checks](docs/apple-wallet.md).
