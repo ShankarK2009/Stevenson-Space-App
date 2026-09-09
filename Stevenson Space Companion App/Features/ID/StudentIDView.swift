@@ -103,6 +103,8 @@ struct StudentIDView: View {
             .buttonStyle(.borderedProminent)
             .tint(StevensonPalette.accent)
 
+            StudentIDWalletView(card: card)
+
             if model.studentIDIsFromAnEarlierSchoolYear, let year = card.schoolYearLabel {
                 Label("This ID was imported for the \(year) school year. "
                       + "Import a fresh screenshot if yours has changed.",
@@ -161,7 +163,7 @@ struct StudentIDView: View {
                     .labelStyle(.titleAndIcon)
             }
 
-            Text("Nothing leaves your phone. The screenshot itself is not saved \u{2014} "
+            Text("Importing stays on your phone. The screenshot itself is not saved \u{2014} "
                  + "only your name, number, grade, school year, barcode details, import date, and photo.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
